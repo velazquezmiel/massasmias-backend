@@ -131,13 +131,12 @@
 - [] Criar endpoint para solicitação de recuperação de senha.
 - [] Implementar endpoints para gerenciamento de usuários (visualizar, editar, deletar).
 - [] Implementar endpoints para gerenciamento de itens do cardápio (visualizar, adicionar, editar, deletar).
-- [] Implementar endpoints para gerenciamento de reservas (visualizar, adicionar, editar, cancelar).
-- [] Implementar endpoints para gerenciamento de pedidos (visualizar, atualizar status, cancelar).
+- [] Implementar endpoints para gerenciamento de reservas (visualizar, adicionar, editar, cancelar(deletar)).
+- [] Implementar endpoints para gerenciamento de pedidos (visualizar, atualizar status, concluir(deletar)).
 - [] Implementar endpoints para gerenciamento de avaliações (visualizar, deletar).
 
 2. **Menu (Cardápios)**
 - [] Criar modelo de dados para itens do cardápio.
-- [] Implementar endpoints para CRUD (Create, Read, Update, Delete) de itens do cardápio.
 - [] Desenvolver lógica para exibição de itens divididos por categorias.
 - [] Implementar campo para especificação de preferências alimentares e restrições.
 
