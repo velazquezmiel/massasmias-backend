@@ -5,7 +5,7 @@
 ### Requisitos Funcionais
 
 1. **Cadastro de Usuários** 
-- Qualquer usuário deve ter acesso ao formulário de cadastro com campos obrigatórios para nome, e-mail, telefone, data de nascimento, endereço (rua, número, complemento, cidade, estado, CEP) e senha.
+- Qualquer usuário deve ter acesso ao formulário de cadastro com campos obrigatórios para nome, e-mail, telefone, data de nascimento, endereço (rua, número, bairro) e senha.
 - O site deve se ter validação de e-mail e telefone (ex.: formato correto, e-mail único).
 
 2. **Login de Usuários**
