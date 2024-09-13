@@ -6,7 +6,7 @@ class AvaliacaoCreate(BaseModel):
     estrela_avaliacao: int = Field(ge=0, le=5)
     usuario_avaliacao: str
     data_avaliacao: datetime
-    hora_avaliacao: time
+    # hora_avaliacao: time
     usuario_id : int
 
 class AvaliacaoRead(BaseModel):
@@ -14,9 +14,9 @@ class AvaliacaoRead(BaseModel):
     estrela_avaliacao: int = Field(ge=0, le=5)
     usuario_avaliacao: str
     data_avaliacao: datetime
-    hora_avaliacao: time
+    # hora_avaliacao: time
     usuario_id: int
 
 
 class AvaliacaoReadList(BaseModel):
-    avaliacoes: [AvaliacaoRead]
+    avaliacoes: list[AvaliacaoRead]
