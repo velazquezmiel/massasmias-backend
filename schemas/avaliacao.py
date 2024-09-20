@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
+from schemas.usuario import UsuarioReadWithAvaliacao
 from time import time
 
 class AvaliacaoCreate(BaseModel):
@@ -15,7 +16,7 @@ class AvaliacaoRead(BaseModel):
     usuario_avaliacao: str
     data_avaliacao: datetime
     # hora_avaliacao: time
-    usuario_id: int
+    usuario_id: UsuarioReadWithAvaliacao
 
 
 class AvaliacaoReadList(BaseModel):

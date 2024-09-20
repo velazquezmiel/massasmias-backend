@@ -4,6 +4,12 @@ from datetime import datetime
 
 from config.database import shutdown_db, startup_db
 from routers.avaliacao import router as avaliacao_router
+from routers.categoria_prato import router as categoria_prato_router
+from routers.mesa import router as mesa_router
+from routers.pedido import router as pedido_router
+from routers.prato import router as prato_router
+from routers.reserva import router as reserva_router
+from routers.usuario import router as usuario_router
 
 
 app = FastAPI(title='MASSAS MIAS')
@@ -27,3 +33,9 @@ def status():
     }
 
 app.include_router(avaliacao_router)
+app.include_router(categoria_prato_router)
+app.include_router(mesa_router)
+app.include_router(pedido_router)
+app.include_router(prato_router)
+app.include_router(reserva_router)
+app.include_router(usuario_router)

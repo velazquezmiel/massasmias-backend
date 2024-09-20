@@ -1,6 +1,6 @@
 from enum import Enum
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date
 
 class TipoUsuario(str, Enum):
     cliente = '0'
@@ -10,29 +10,35 @@ class TipoUsuario(str, Enum):
 class UsuarioCreate(BaseModel):
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: int
-    data_nascimento: datetime
+    telefone_usuario: str  # Change to str to avoid int limits
+    data_nascimento: date
     endereco_usuario: str
     senha_usuario: str
-    tipo: TipoUsuario
+    tipo_usuario: TipoUsuario
 
 class UsuarioUpdate(BaseModel):
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: int
+    telefone_usuario: str  # Change to str
     endereco_usuario: str
     senha_usuario: str
-    tipo: TipoUsuario
+    tipo_usuario: TipoUsuario
 
 class UsuarioRead(BaseModel):
     id_usuario: int
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: int
-    data_nascimento: datetime
+    telefone_usuario: str  # Change to str
+    data_nascimento: date
     endereco_usuario: str
     senha_usuario: str
-    tipo: TipoUsuario
+    tipo_usuario: TipoUsuario
+
+class UsuarioReadWithAvaliacao(BaseModel):
+    id_usuario: int
+    nome_usuario: str
+    email_usuario: str
+
 
 class UsuarioReadList(BaseModel):
     usuarios: list[UsuarioRead]

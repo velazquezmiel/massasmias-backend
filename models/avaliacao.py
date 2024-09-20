@@ -1,4 +1,4 @@
-from peewee import AutoField, ForeignKeyField, Model, DateField, TimeField, IntegerField, TextField
+from peewee import AutoField, ForeignKeyField, Model, DateField, TimeField, IntegerField, TextField, CharField
 from config.database import database
 from models.usuario import UsuarioDB
 
@@ -7,10 +7,9 @@ from models.usuario import UsuarioDB
 class AvaliacaoDB(Model):
     id_avaliacao = AutoField()
     estrela_avaliacao = IntegerField()
-    usuario_avaliacao = TextField()
+    usuario_avaliacao = CharField()
     usuario_id = ForeignKeyField(model=UsuarioDB, backref='avaliacoes')
     data_avaliacao = DateField()
-    hora_avaliacao = TimeField()
 
 
     class Meta:

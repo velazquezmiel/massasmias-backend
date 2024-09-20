@@ -8,7 +8,7 @@ class PratoDB(Model):
     valor_prato = DoubleField()
     imagem_prato = CharField()
     descricao_prato = CharField()
-    categorias_prato = ForeignKeyField(model=CategoriaPratoDB, backref='pratos')
+    id_categorias_prato = ForeignKeyField(model=CategoriaPratoDB, backref='pratos')
 
 
     class Meta:

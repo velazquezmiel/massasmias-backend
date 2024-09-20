@@ -1,6 +1,5 @@
 from enum import Enum
 from datetime import datetime
-from time import time
 from pydantic import BaseModel
 
 
@@ -15,14 +14,12 @@ class PedidoCreate(BaseModel):
     prato_id: int
     status_pedido: StatusPedido
     data_pedido : datetime
-    hora_pedido : time
 
 class PedidoUpdate(BaseModel):
     usuario_id: int
     prato_id: int
     status_pedido: StatusPedido
     data_pedido: datetime
-    hora_pedido: time
 
 class PedidoRead(BaseModel):
     id_pedido: int
@@ -30,7 +27,6 @@ class PedidoRead(BaseModel):
     prato_id: int
     status_pedido: StatusPedido
     data_pedido: datetime
-    hora_pedido: time
 
 class PedidoReadList(BaseModel):
-    pedidos: [PedidoRead]
+    pedidos: list[PedidoRead]

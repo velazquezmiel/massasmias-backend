@@ -12,4 +12,4 @@ class CategoriaPratoRead(BaseModel):
 
 
 class CategoriaPratoReadList(BaseModel):
-    categorias_prato: [CategoriaPratoRead]
+    categorias_prato: list[CategoriaPratoRead]
