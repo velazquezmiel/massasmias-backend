@@ -11,7 +11,6 @@ class PedidoDB(Model):
     prato_id = ForeignKeyField(model=PratoDB, backref='pedidos')
     status_pedido = CharField()
     data_pedido = DateField()
-    hora_pedido = TimeField()
 
 
     class Meta:

@@ -15,7 +15,7 @@ router = APIRouter(
 
 @router.post(path='', response_model=PedidoRead)
 def criar_pedido(novo_pedido: PedidoCreate):
-    pedido = PedidoDB.create(**novo_pedido.dict())
+    pedido = PedidoDB.create(**novo_pedido.model_dump())
     return pedido
 
 

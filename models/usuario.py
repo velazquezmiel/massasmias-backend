@@ -5,11 +5,11 @@ class UsuarioDB(Model):
     id_usuario = AutoField()
     nome_usuario = CharField(unique=True)
     email_usuario = CharField(unique=True)
-    telefone_usuario = CharField(max_length=15, unique=True)  # Increased length for formatting
+    telefone_usuario = CharField(max_length=15, unique=True)
     data_nascimento = DateField()
     endereco_usuario = CharField()
-    senha_usuario = CharField()  # Ensure this field exists
-    tipo_usuario = CharField()  # Keep this if needed
+    senha_usuario = CharField()
+    tipo_usuario = CharField()
 
     class Meta:
         database = database

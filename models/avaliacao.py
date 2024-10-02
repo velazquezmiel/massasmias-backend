@@ -1,4 +1,4 @@
-from peewee import AutoField, ForeignKeyField, Model, DateField, TimeField, IntegerField, TextField, CharField
+from peewee import AutoField, ForeignKeyField, Model, DateField, IntegerField, CharField
 from config.database import database
 from models.usuario import UsuarioDB
 

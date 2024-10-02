@@ -39,6 +39,17 @@ class UsuarioReadWithAvaliacao(BaseModel):
     nome_usuario: str
     email_usuario: str
 
+class UsuarioReadPedido(BaseModel):
+    id_usuario: int
+    nome_usuario: str
+    telefone_usuario: str
+    endereco_usuario: str
+
+class UsuarioReadReserva(BaseModel):
+    id_usuario: int
+    nome_usuario: str
+    telefone_usuario: str
+    email_usuario: str
 
 class UsuarioReadList(BaseModel):
     usuarios: list[UsuarioRead]

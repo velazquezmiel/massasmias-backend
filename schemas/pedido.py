@@ -1,6 +1,8 @@
 from enum import Enum
 from datetime import datetime
 from pydantic import BaseModel
+from schemas.usuario import UsuarioReadPedido
+from schemas.prato import PratoPedido
 
 
 class StatusPedido(str, Enum):
@@ -23,8 +25,8 @@ class PedidoUpdate(BaseModel):
 
 class PedidoRead(BaseModel):
     id_pedido: int
-    usuario_id: int
-    prato_id: int
+    usuario_id: UsuarioReadPedido
+    prato_id: PratoPedido
     status_pedido: StatusPedido
     data_pedido: datetime
 

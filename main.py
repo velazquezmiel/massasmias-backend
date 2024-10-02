@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles  # Importar StaticFiles
 from datetime import datetime
 
 from config.database import shutdown_db, startup_db
@@ -10,7 +11,7 @@ from routers.pedido import router as pedido_router
 from routers.prato import router as prato_router
 from routers.reserva import router as reserva_router
 from routers.usuario import router as usuario_router
-
+import os  # Importar os para manipulação de caminho
 
 app = FastAPI(title='MASSAS MIAS')
 
@@ -24,6 +25,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Montar o diretório de imagens para servir arquivos estáticos
+app.mount("/images", StaticFiles(directory=os.path.join(os.getcwd(), "images")), name="images")
 
 @app.get('/')
 def status():
