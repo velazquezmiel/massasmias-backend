@@ -12,6 +12,7 @@ from routers.prato import router as prato_router
 from routers.reserva import router as reserva_router
 from routers.usuario import router as usuario_router
 import os  # Importar os para manipulação de caminho
+from routers.dashboard import router as dashboard_router
 
 app = FastAPI(title='MASSAS MIAS')
 
@@ -26,7 +27,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Montar o diretório de imagens para servir arquivos estáticos
 app.mount("/images", StaticFiles(directory=os.path.join(os.getcwd(), "images")), name="images")
 
 @app.get('/')
@@ -43,3 +43,5 @@ app.include_router(pedido_router)
 app.include_router(prato_router)
 app.include_router(reserva_router)
 app.include_router(usuario_router)
+
+app.include_router(dashboard_router)

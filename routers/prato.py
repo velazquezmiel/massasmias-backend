@@ -2,7 +2,6 @@ from fastapi import APIRouter, HTTPException, UploadFile, File, Form
 from fastapi.responses import FileResponse
 import os
 
-# Supondo que você tenha um modelo de banco de dados definido
 from models.prato import PratoDB
 from schemas.prato import PratoCreate, PratoUpdate, PratoRead, PratoReadList
 
@@ -54,18 +53,30 @@ def obter_prato(id_prato: int):
     return prato
 
 @router.patch(path='/{id_prato}', response_model=PratoRead)
-def atualizar_prato(id_prato: int, prato_atualizado: PratoUpdate):
+async def atualizar_prato(
+    id_prato: int,
+    nome_prato: str = Form(...),
+    valor_prato: float = Form(...),
+    descricao_prato: str = Form(...),
+    id_categoria_prato: int = Form(...),
+    imagem_prato: UploadFile = File(None)
+):
     prato = PratoDB.get_or_none(PratoDB.id_prato == id_prato)
     if not prato:
         raise HTTPException(status_code=404, detail="Prato não encontrado")
 
-    prato.nome_prato = prato_atualizado.nome_prato
-    prato.valor_prato = prato_atualizado.valor_prato
-    prato.imagem_prato = prato_atualizado.imagem_prato
-    prato.descricao_prato = prato_atualizado.descricao_prato
-    prato.id_categoria_prato = prato_atualizado.id_categoria_prato
-    prato.save()
+    prato.nome_prato = nome_prato
+    prato.valor_prato = valor_prato
+    prato.descricao_prato = descricao_prato
+    prato.id_categoria_prato = id_categoria_prato
 
+    if imagem_prato:
+        caminho_imagem = os.path.join('images', imagem_prato.filename)
+        with open(caminho_imagem, 'wb') as f:
+            f.write(await imagem_prato.read())
+        prato.imagem_prato = caminho_imagem
+
+    prato.save()
     return prato
 
 @router.delete(path='/{id_prato}', response_model=PratoRead)

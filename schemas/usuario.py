@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel
+from pydantic import BaseModel, constr, Field
 from datetime import date
 
 class TipoUsuario(str, Enum):
@@ -10,7 +10,7 @@ class TipoUsuario(str, Enum):
 class UsuarioCreate(BaseModel):
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: str  # Change to str to avoid int limits
+    telefone_usuario: str  # Alterado para str para evitar limites de int
     data_nascimento: date
     endereco_usuario: str
     senha_usuario: str
@@ -19,16 +19,17 @@ class UsuarioCreate(BaseModel):
 class UsuarioUpdate(BaseModel):
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: str  # Change to str
+    telefone_usuario: str
     endereco_usuario: str
-    senha_usuario: str
+    senha_usuario: str = Field(default=None, nullable=True)  # Torna senha opcional
     tipo_usuario: TipoUsuario
+
 
 class UsuarioRead(BaseModel):
     id_usuario: int
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: str  # Change to str
+    telefone_usuario: str  # Alterado para str
     data_nascimento: date
     endereco_usuario: str
     senha_usuario: str
@@ -50,6 +51,11 @@ class UsuarioReadReserva(BaseModel):
     nome_usuario: str
     telefone_usuario: str
     email_usuario: str
+
+class LoginData(BaseModel):
+    login_usuario: str  # Pode ser e-mail ou telefone
+    senha_usuario: str
+
 
 class UsuarioReadList(BaseModel):
     usuarios: list[UsuarioRead]

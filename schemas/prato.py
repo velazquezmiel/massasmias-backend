@@ -27,6 +27,10 @@ class PratoPedido(BaseModel):
     id_prato: int
     nome_prato: str
     imagem_prato: str
+    valor_prato: float
+
+class ImagemPratoPedido(BaseModel):
+    imagem_prato: str
 
 class PratoReadList(BaseModel):
     pratos:list[PratoRead]

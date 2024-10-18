@@ -36,7 +36,7 @@ def atualizar_mesa(id_mesa: int, mesa_atualizada: MesaUpdate):
     mesa = MesaDB.get_or_none(MesaDB.id_mesa == id_mesa)
     if mesa:
         mesa.codigo_mesa = mesa_atualizada.codigo_mesa
-        mesa.numero_cadeira = mesa_atualizada.numero_cadeira
+        mesa.numero_cadeiras = mesa_atualizada.numero_cadeiras
         mesa.save()
     return mesa
 

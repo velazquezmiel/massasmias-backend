@@ -2,7 +2,7 @@ from enum import Enum
 from datetime import datetime
 from pydantic import BaseModel
 from schemas.usuario import UsuarioReadPedido
-from schemas.prato import PratoPedido
+from schemas.prato import PratoPedido, ImagemPratoPedido
 
 
 class StatusPedido(str, Enum):
