@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from peewee import fn
 from schemas.dashboard import DashboardRead, Estatisticas, PedidoPendentes
 from models.avaliacao import AvaliacaoDB
@@ -6,21 +6,30 @@ from models.pedido import PedidoDB
 from models.prato import PratoDB
 from models.reserva import ReservaDB
 from models.usuario import UsuarioDB
-import os
-from fastapi.responses import FileResponse
+from auth import (
+    get_user,
+    is_admin,
+    is_root,
+    get_user_from_token  # Importa a nova função
+)
+from fastapi.security import OAuth2PasswordBearer
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="usuarios/login")
 
 router = APIRouter()
 
 @router.get("/dashboard", response_model=DashboardRead)
-async def get_dashboard():
+async def get_dashboard(token: str = Depends(oauth2_scheme)):
+    usuario = get_user_from_token(token)  # Usa a função extraída
+
+    if not (is_admin(usuario) or is_root(usuario)):
+        raise HTTPException(status_code=403, detail="Acesso negado. Usuário não autorizado.")
+
     media_avaliacoes = round(AvaliacaoDB.select(fn.AVG(AvaliacaoDB.estrela_avaliacao)).scalar() or 0, 1)
     numero_pedidos = PedidoDB.select().count()
     numero_pratos = PratoDB.select().count()
     numero_reservas = ReservaDB.select().count()
     numero_usuarios = UsuarioDB.select().count()
-
-
 
     estatisticas = Estatisticas(
         media_avaliacoes=media_avaliacoes,
@@ -44,6 +53,5 @@ async def get_dashboard():
         )
         for pedido in pedidos_pendentes
     ]
-
 
     return DashboardRead(estatisticas=estatisticas, pedidos_pendentes=pedidos_pendentes_list)
