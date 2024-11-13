@@ -40,10 +40,20 @@ async def get_image(image_name: str):
         return FileResponse(image_path)
     raise HTTPException(status_code=404, detail="Imagem não encontrada")
 
+
 @router.get(path='', response_model=PratoReadList)
-def listar_pratos():
-    pratos = PratoDB.select()
+def listar_pratos(search: str = None, category: int = None):
+    query = PratoDB.select()
+
+    if search:
+        query = query.where(PratoDB.nome_prato.contains(search))
+    if category:
+        query = query.where(PratoDB.id_categoria_prato == category)
+
+    pratos = list(query)
     return {'pratos': pratos}
+
+
 
 @router.get(path='/{id_prato}', response_model=PratoRead)
 def obter_prato(id_prato: int):
@@ -51,6 +61,8 @@ def obter_prato(id_prato: int):
     if not prato:
         raise HTTPException(status_code=404, detail="Prato não encontrado")
     return prato
+
+
 
 @router.patch(path='/{id_prato}', response_model=PratoRead)
 async def atualizar_prato(

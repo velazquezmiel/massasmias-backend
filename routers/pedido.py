@@ -1,4 +1,7 @@
+import os
+
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import FileResponse
 from models.pedido import PedidoDB
 from schemas.pedido import (
     PedidoCreate,
@@ -46,6 +49,13 @@ def atualizar_pedido(id_pedido: int, pedido_atualizado: PedidoUpdate):
     pedido.save()
 
     return pedido
+
+@router.get("/images/{image_name}")
+async def get_image(image_name: str):
+    image_path = os.path.join("images", image_name)
+    if os.path.exists(image_path):
+        return FileResponse(image_path)
+    raise HTTPException(status_code=404, detail="Imagem não encontrada")
 
 
 @router.delete(path='/{id_pedido}', response_model=PedidoRead)

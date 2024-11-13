@@ -10,7 +10,7 @@ class TipoUsuario(str, Enum):
 class UsuarioCreate(BaseModel):
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: str  # Alterado para str para evitar limites de int
+    telefone_usuario: str
     data_nascimento: date
     endereco_usuario: str
     senha_usuario: str
@@ -21,19 +21,23 @@ class UsuarioUpdate(BaseModel):
     email_usuario: str
     telefone_usuario: str
     endereco_usuario: str
-    senha_usuario: str = Field(default=None, nullable=True)  # Torna senha opcional
+    senha_usuario: str = Field(default=None, nullable=True)
     tipo_usuario: TipoUsuario
-
 
 class UsuarioRead(BaseModel):
     id_usuario: int
     nome_usuario: str
     email_usuario: str
-    telefone_usuario: str  # Alterado para str
+    telefone_usuario: str
     data_nascimento: date
     endereco_usuario: str
-    senha_usuario: str
     tipo_usuario: TipoUsuario
+
+class LoginResponse(BaseModel):
+    access_token: str
+    token_type: str
+    tipo_usuario: TipoUsuario
+    id_usuario: int
 
 class UsuarioReadWithAvaliacao(BaseModel):
     id_usuario: int
@@ -51,11 +55,6 @@ class UsuarioReadReserva(BaseModel):
     nome_usuario: str
     telefone_usuario: str
     email_usuario: str
-
-class LoginData(BaseModel):
-    login_usuario: str  # Pode ser e-mail ou telefone
-    senha_usuario: str
-
 
 class UsuarioReadList(BaseModel):
     usuarios: list[UsuarioRead]

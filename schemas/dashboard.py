@@ -14,6 +14,7 @@ class PedidoPendentes(BaseModel):
     nome: str
     descricao: str
     status: str
+    imagem: str
 
 class DashboardRead(BaseModel):
     estatisticas: Estatisticas
