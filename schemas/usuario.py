@@ -6,6 +6,7 @@ class TipoUsuario(str, Enum):
     cliente = '0'
     admin = '1'
     ser_supremo = '2'
+    visitante = '3'
 
 class UsuarioCreate(BaseModel):
     nome_usuario: str

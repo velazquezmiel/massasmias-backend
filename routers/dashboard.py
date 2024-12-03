@@ -27,15 +27,22 @@ async def get_dashboard(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=403, detail="Acesso negado. Usuário não autorizado.")
 
     # Agregações e contagens para o dashboard
-    media_avaliacoes = round(AvaliacaoDB.select(fn.AVG(AvaliacaoDB.estrela_avaliacao)).scalar() or 0, 1)
     numero_pedidos = PedidoDB.select().count()
     numero_pratos = PratoDB.select().count()
     numero_reservas = ReservaDB.select().count()
     numero_usuarios = UsuarioDB.select().count()
 
+    lucro_total = (
+            PedidoDB
+            .select(fn.SUM(PratoDB.valor_prato))  # Soma o preço dos pratos associados
+            .join(PratoDB, on=(PedidoDB.prato_id == PratoDB.id_prato))  # Faz a junção entre Pedido e Prato
+            .where(PedidoDB.status_pedido == 2)  # Filtra pelo status 'enviado'
+            .scalar() or 0  # Retorna 0 caso não haja nenhum pedido 'enviado'
+    )
+
     estatisticas = Estatisticas(
-        media_avaliacoes=media_avaliacoes,
         numero_pedidos=numero_pedidos,
+        lucro_total=lucro_total,  # Inclui o lucro total no dashboard
         numero_pratos=numero_pratos,
         numero_reservas=numero_reservas,
         numero_usuarios=numero_usuarios

@@ -3,11 +3,12 @@ from typing import List
 from schemas.prato import ImagemPratoPedido
 
 class Estatisticas(BaseModel):
-    media_avaliacoes: float
     numero_pedidos: int
     numero_pratos: int
     numero_reservas: int
     numero_usuarios: int
+    lucro_total: float  # Campo adicionado para o valor do lucro total
+
 
 class PedidoPendentes(BaseModel):
     id: int
